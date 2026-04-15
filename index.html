@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>EduSport Battle</title>
-    <!-- Font Catchy -->
+    <title>EduSport Battle - Volley Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -13,7 +12,10 @@
             --secondary: #3b82f6;
             --accent: #f59e0b;
             --danger: #ef4444;
-            --p1: #3b82f6; --p2: #ef4444; --p3: #f59e0b; --p4: #a855f7;
+            --p1: #3b82f6;
+            --p2: #ef4444;
+            --p3: #f59e0b;
+            --p4: #a855f7;
             --font-main: 'Outfit', sans-serif;
             --font-title: 'Bangers', cursive;
         }
@@ -29,19 +31,19 @@
             flex-direction: column;
         }
 
-        /* ================= NAVIGATION & MENUS ================= */
-        .top-bar { position: absolute; top: 15px; right: 15px; z-index: 1000; display: flex; gap: 12px; }
+        /* Top Navigation */
+        .top-bar { position: absolute; top: 15px; right: 15px; z-index: 1000; display: flex; gap: 10px; }
         .icon-btn { 
             background: rgba(255,255,255,0.1); 
             border: 1px solid rgba(255,255,255,0.2); 
             border-radius: 50%; width: 45px; height: 45px; 
             color: white; cursor: pointer; backdrop-filter: blur(10px); 
             transition: 0.3s; display: flex; align-items: center; 
-            justify-content: center; font-size: 1.2rem; text-decoration: none; 
+            justify-content: center; font-size: 1.1rem;
         }
-        .icon-btn:hover { background: rgba(255,255,255,0.2); transform: scale(1.1); }
-        .icon-btn.active { background: var(--primary); border-color: #fff; }
+        .icon-btn:hover { background: rgba(255,255,255,0.2); transform: scale(1.05); }
 
+        /* Main Menu */
         #main-menu {
             position: fixed; inset: 0; z-index: 900;
             background: radial-gradient(circle at top right, #1e293b, #020617);
@@ -53,193 +55,213 @@
             background: rgba(255,255,255,0.03); padding: 30px; border-radius: 32px; 
             border: 1px solid rgba(255,255,255,0.1); text-align: center; backdrop-filter: blur(20px);
             box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
-            animation: fadeIn 0.8s ease-out;
             max-width: 500px; width: 100%; position: relative;
         }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* ================= DEKORASI FOTO KREATOR ================= */
-        .creator-wrapper {
-            position: relative;
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .creator-glow {
-            position: absolute;
-            inset: -5px;
-            background: conic-gradient(from 0deg, var(--secondary), var(--primary), var(--accent), var(--secondary));
-            border-radius: 50%;
-            animation: rotateGlow 4s linear infinite;
-            filter: blur(8px);
-            opacity: 0.6;
-        }
-        @keyframes rotateGlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        .creator-container {
-            width: 85px; height: 85px; position: relative; padding: 3px;
-            background: #0f172a; border-radius: 50%; z-index: 2; overflow: hidden;
-        }
-        .creator-img {
-            width: 100%; height: 100%; border-radius: 50%; display: block;
-            object-fit: cover; border: 2px solid rgba(255,255,255,0.2); background: #1e293b;
+        .header-container {
+            display: flex; flex-direction: column; align-items: center; gap: 20px; margin-bottom: 25px;
         }
 
-        /* ================= HEADER SECTION (JUDUL + LOGO) ================= */
-        .header-section { display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 20px; }
-        .side-image {
-            width: 80px; height: 80px; border-radius: 15px; overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4); border: 2px solid var(--secondary); flex-shrink: 0;
+        /* Bingkai Lingkaran untuk Logo */
+        .logo-circle-frame {
+            width: 140px; height: 140px; border-radius: 50%; overflow: hidden;
+            border: 4px solid var(--secondary); box-shadow: 0 0 25px rgba(59, 130, 246, 0.6);
+            background: rgba(255, 255, 255, 0.05); display: flex; align-items: center;
+            justify-content: center; position: relative;
         }
-        .side-image img { width: 100%; height: 100%; display: block; object-fit: cover; }
-        .title-group { text-align: left; }
+
+        .top-logo {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+
+        .title-row {
+            display: flex; align-items: center; justify-content: center; gap: 15px;
+        }
+
+        .side-logo {
+            width: 50px; height: auto;
+        }
+
         .game-title { 
-            font-family: var(--font-title); font-size: 3rem; line-height: 0.9;
-            letter-spacing: 2px; text-transform: uppercase;
+            font-family: var(--font-title); font-size: 3rem; line-height: 0.9; text-align: center;
             background: linear-gradient(135deg, #fff 20%, var(--secondary) 50%, var(--primary) 80%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-        .title-sub { color: var(--accent); -webkit-text-fill-color: initial; }
 
-        /* ================= TOMBOL & SELEKTOR ================= */
-        .btn-group { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; width: 100%; }
-        .menu-btn { 
-            padding: 12px; border: none; border-radius: 16px; font-weight: 800; cursor: pointer; 
-            transition: all 0.3s; font-size: 0.95rem; text-transform: uppercase;
-        }
+        .btn-group { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+        .menu-btn { padding: 12px; border: none; border-radius: 16px; font-weight: 800; cursor: pointer; transition: 0.2s; text-transform: uppercase; }
         .btn-primary { background: #fff; color: #000; }
+        
         .mode-selector { display: flex; background: rgba(0,0,0,0.4); border-radius: 14px; padding: 5px; margin-bottom: 10px; }
         .mode-opt { flex: 1; padding: 8px; border-radius: 10px; cursor: pointer; font-size: 0.75rem; font-weight: 900; color: #94a3b8; }
         .mode-opt.active { background: #fff; color: #000; }
 
-        /* ================= FOOTER ================= */
-        .footer-credits {
-            margin-top: 15px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1);
-            font-size: 0.7rem; color: #94a3b8;
-        }
-        .social-link {
-            display: inline-flex; align-items: center; gap: 6px; margin-top: 8px;
-            color: white; text-decoration: none; padding: 6px 15px;
-            background: #FF0000; border-radius: 10px; font-size: 0.75rem; font-weight: 800;
-        }
-
-        /* ================= GAMEPLAY ================= */
         #game-container { position: fixed; inset: 0; display: none; width: 100%; height: 100%; }
         .player-area { position: relative; display: flex; flex-direction: column; overflow: hidden; background: #020617; border: 1px solid rgba(255,255,255,0.05); }
-        .hud { padding: 10px; display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 900; }
-        .timer-track { height: 4px; background: rgba(255,255,255,0.1); width: 100%; }
-        .timer-fill { height: 100%; background: #fff; width: 100%; }
-        .game-content { flex: 1; display: flex; flex-direction: column; padding: 10px; justify-content: space-between; }
-        .playground { flex: 1; display: flex; align-items: center; justify-content: center; }
-        .ball { font-size: clamp(2rem, 10vh, 5rem); transition: 0.3s; }
-        .question-card { background: rgba(255,255,255,0.07); border-radius: 16px; padding: 12px; backdrop-filter: blur(10px); }
-        .q-text { font-size: clamp(0.9rem, 2.5vh, 1.2rem); font-weight: 800; text-align: center; margin-bottom: 10px; }
-        .options-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
-        .option-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 10px; border-radius: 12px; color: white; cursor: pointer; }
+        .player-area.eliminated { opacity: 0.2; pointer-events: none; filter: grayscale(1); }
+        
+        .hud { padding: 10px; display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 900; background: rgba(0,0,0,0.2); }
+        .timer-track { height: 5px; background: rgba(255,255,255,0.1); width: 100%; }
+        .timer-fill { height: 100%; background: var(--secondary); width: 100%; transition: width 0.1s linear; }
 
+        .game-content { flex: 1; display: flex; flex-direction: column; padding: 12px; justify-content: space-between; }
+        .playground { flex: 1; display: flex; align-items: center; justify-content: center; position: relative; }
+        .ball { font-size: clamp(3rem, 12vh, 6rem); transition: 0.4s; z-index: 5; filter: drop-shadow(0 0 20px rgba(255,255,255,0.2)); }
+
+        .question-card { background: rgba(255,255,255,0.06); border-radius: 20px; padding: 15px; border: 1px solid rgba(255,255,255,0.1); position: relative; z-index: 10; }
+        .q-text { font-size: clamp(0.9rem, 2.2vh, 1.2rem); font-weight: 800; text-align: center; margin-bottom: 12px; min-height: 3em; }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .option-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 10px; border-radius: 12px; color: white; cursor: pointer; font-size: 0.8rem; font-weight: 700; transition: 0.2s; }
+
+        #victory-screen {
+            position: fixed; inset: 0; z-index: 2000; background: rgba(2, 6, 23, 0.98);
+            display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px;
+        }
+
+        #game-container.mode-solo { grid-template-columns: 1fr; }
         #game-container.mode-duel { grid-template-columns: 1fr 1fr; }
         #game-container.mode-squad { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
 
         @media (max-width: 600px) {
             #game-container.mode-duel { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
-            #game-container.mode-squad { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
+            .options-grid { grid-template-columns: 1fr; }
+            .logo-circle-frame { width: 100px; height: 100px; }
             .game-title { font-size: 2.2rem; }
-            .side-image { width: 60px; height: 60px; }
         }
+
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        .shake { animation: shake 0.3s ease-in-out; }
+        .floating { animation: float 3s ease-in-out infinite; }
     </style>
 </head>
 <body>
-
     <div class="top-bar">
+        <button class="icon-btn" onclick="toggleFullscreen()">⛶</button>
         <button class="icon-btn" onclick="location.reload()">🏠</button>
-        <button id="fullscreen-btn" class="icon-btn">⛶</button>
-        <button id="bgm-toggle" class="icon-btn">🎵</button>
         <button id="audio-toggle" class="icon-btn">🔈</button>
     </div>
 
     <div id="main-menu">
         <div class="menu-card">
-            <!-- Balikkan Foto Kreator -->
-            <div class="creator-wrapper">
-                <div class="creator-glow"></div>
-                <div class="creator-container">
-                    <img src="https://i.imgur.com/TKnsYjX.png" alt="Arief Hidayat S.Pd" class="creator-img" onerror="this.src='https://api.dicebear.com/7.x/avataaars/svg?seed=Arief'">
+            <div class="header-container">
+                <!-- Bingkai Lingkaran Logo -->
+                <div class="logo-circle-frame floating">
+                    <img src="https://imgur.com/hyDYq4o.png" alt="[Logo EduSport Berbingkai]" class="top-logo">
                 </div>
-            </div>
-
-            <!-- Balikkan Header dengan Logo -->
-            <div class="header-section">
-                <div class="side-image">
-                    <img src="https://i.imgur.com/CMSJ8wk.png" alt="Logo EduSport" onerror="this.style.display='none'">
-                </div>
-                <div class="title-group">
-                    <h1 class="game-title">EDUSPORT <br><span class="title-sub">BATTLE</span></h1>
+                
+                <div class="title-row">
+                    <!-- Ikon Voli Samping Judul -->
+                    <img src="https://imgur.com/CMSJ8wk.png" alt="[Ikon Voli]" class="side-logo">
+                    <h1 class="game-title">VOLLEY<br><span style="color:var(--accent); -webkit-text-fill-color:initial;">CHALLENGE</span></h1>
                 </div>
             </div>
             
             <div class="mode-selector">
-                <div id="m-score" class="mode-opt active" onclick="setRules('score')">MODE SKOR</div>
-                <div id="m-elim" class="mode-opt" onclick="setRules('elim')">ELIMINASI</div>
+                <div id="m-score" class="mode-opt active" onclick="setRules('score')">10 PERTANYAAN</div>
+                <div id="m-elim" class="mode-opt" onclick="setRules('elim')">ELIMINASI (3❤️)</div>
             </div>
 
             <div class="btn-group">
-                <button class="menu-btn btn-primary" onclick="initGame(1)">🚀 Main Sendiri</button>
+                <button class="menu-btn btn-primary" onclick="initGame(1)">🚀 Solo Mode</button>
                 <button class="menu-btn" style="background:var(--p2); color:white" onclick="initGame(2)">🔥 Duel 1v1</button>
-                <button class="menu-btn" style="background:var(--p4); color:white" onclick="initGame(4)">👑 Squad 4P</button>
+                <button class="menu-btn" style="background:var(--p4); color:white" onclick="initGame(4)">👑 Squad Battle</button>
             </div>
-
-            <!-- Balikkan Kredit Footer -->
-            <div class="footer-credits">
-                Karya: <strong>Arief Hidayat S.Pd</strong><br>
-                <a href="https://www.youtube.com/@fakhrifarhan" target="_blank" class="social-link">
-                    <svg style="width:18px" viewBox="0 0 24 24"><path fill="currentColor" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                    @fakhrifarhan
-                </a>
-            </div>
+            <p style="font-size: 0.6rem; color: #64748b; margin-top: 20px;">Bank Soal: 50 Pertanyaan | Target: 10 Soal</p>
         </div>
     </div>
 
     <div id="game-container"></div>
 
+    <div id="victory-screen">
+        <div class="logo-circle-frame floating" style="width: 120px; height: 120px; margin-bottom: 20px;">
+            <img src="https://imgur.com/hyDYq4o.png" alt="[Logo Kemenangan]" class="top-logo">
+        </div>
+        <h2 style="font-family: var(--font-title); font-size: 3rem; color: var(--accent);">SELESAI!</h2>
+        <div id="scoreboard-results" style="margin: 20px 0; width: 100%; max-width: 400px;"></div>
+        <button class="menu-btn btn-primary" style="padding: 15px 40px" onclick="location.reload()">MAIN LAGI</button>
+    </div>
+
     <script>
-        // Logika Fullscreen
-        const fsBtn = document.getElementById('fullscreen-btn');
-        fsBtn.addEventListener('click', () => {
-            const doc = window.document;
-            const docEl = doc.documentElement;
-            const requestFS = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
-            const exitFS = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
-
-            if (!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
-                if (requestFS) requestFS.call(docEl);
-            } else {
-                if (exitFS) exitFS.call(doc);
-            }
-        });
-
-        document.addEventListener('fullscreenchange', updateFsIcon);
-        document.addEventListener('webkitfullscreenchange', updateFsIcon);
-        document.addEventListener('mozfullscreenchange', updateFsIcon);
-        document.addEventListener('MSFullscreenChange', updateFsIcon);
-
-        function updateFsIcon() {
-            const isFs = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
-            fsBtn.textContent = isFs ? '❐' : '⛶';
-        }
-
-        // Game Logic
         const questionBank = [
-            { q: "Durasi waktu istirahat antar babak sepak bola?", options: ["10 Menit", "15 Menit", "20 Menit", "5 Menit"], answer: 1, theme: '⚽' },
-            { q: "Tinggi ring basket dari lantai?", options: ["2.50 Meter", "3.05 Meter", "3.50 Meter", "2.75 Meter"], answer: 1, theme: '🏀' },
-            { q: "Teknik memukul shuttlecock tipis di depan net?", options: ["Smash", "Dropshot", "Netting", "Lob"], answer: 2, theme: '🏸' },
-            { q: "Jumlah pemain voli dalam satu lapangan?", options: ["5 Orang", "6 Orang", "11 Orang", "4 Orang"], answer: 1, theme: '🏐' }
+            { q: "Siapa penemu permainan bola voli?", options: ["James Naismith", "William G. Morgan", "George Hancock", "Duke of Beaufort"], answer: 1 },
+            { q: "Apa nama asli permainan bola voli saat pertama kali diciptakan?", options: ["Mintonette", "Volley Ball", "Handball", "Stickball"], answer: 0 },
+            { q: "Tahun berapa permainan bola voli diciptakan?", options: ["1891", "1895", "1900", "1920"], answer: 1 },
+            { q: "Berapa jumlah pemain dalam satu tim bola voli di lapangan?", options: ["4 Orang", "5 Orang", "6 Orang", "11 Orang"], answer: 2 },
+            { q: "Induk organisasi bola voli dunia adalah?", options: ["FIFA", "FIBA", "FIVB", "IAAF"], answer: 2 },
+            { q: "Induk organisasi bola voli di Indonesia adalah?", options: ["PBSI", "PSSI", "PBVSI", "PERBASI"], answer: 2 },
+            { q: "Berapa ukuran standar panjang lapangan bola voli?", options: ["12 Meter", "15 Meter", "18 Meter", "20 Meter"], answer: 2 },
+            { q: "Berapa ukuran standar lebar lapangan bola voli?", options: ["8 Meter", "9 Meter", "10 Meter", "12 Meter"], answer: 1 },
+            { q: "Berapa tinggi net bola voli untuk kategori putra?", options: ["2.24 m", "2.34 m", "2.43 m", "2.44 m"], answer: 2 },
+            { q: "Berapa tinggi net bola voli untuk kategori putri?", options: ["2.24 m", "2.34 m", "2.42 m", "2.15 m"], answer: 0 },
+            { q: "Pukulan yang dilakukan untuk memulai permainan disebut?", options: ["Smash", "Service", "Blocking", "Passing"], answer: 1 },
+            { q: "Pemain yang bertugas sebagai pengumpan atau pengatur serangan disebut?", options: ["Libero", "Tosser/Setter", "Spiker", "Server"], answer: 1 },
+            { q: "Pemain yang hanya bertugas bertahan dan tidak boleh melakukan smash?", options: ["Tosser", "Libero", "Blocker", "Smasher"], answer: 1 },
+            { q: "Pukulan keras dan menukik tajam ke arah lawan disebut?", options: ["Lobs", "Service", "Smash/Spike", "Passing"], answer: 2 },
+            { q: "Upaya membendung smash lawan di atas net disebut?", options: ["Defending", "Blocking", "Receiving", "Set-up"], answer: 1 },
+            { q: "Berapa kali maksimal sentuhan bola dalam satu tim sebelum diseberangkan?", options: ["2 Kali", "3 Kali", "4 Kali", "5 Kali"], answer: 1 },
+            { q: "Pemain nomor berapa yang melakukan servis pertama kali?", options: ["Posisi 1", "Posisi 3", "Posisi 6", "Posisi 4"], answer: 0 },
+            { q: "Arah rotasi pemain bola voli adalah?", options: ["Searah jarum jam", "Berlawanan jarum jam", "Maju mundur", "Bebas"], answer: 0 },
+            { q: "Service yang dilakukan dengan cara melompat disebut?", options: ["Normal Serve", "Floating Serve", "Jump Serve", "Under Serve"], answer: 2 },
+            { q: "Berapa poin kemenangan dalam sistem Rally Point normal?", options: ["15 Poin", "21 Poin", "25 Poin", "30 Poin"], answer: 2 },
+            { q: "Jika skor 24-24, maka terjadi?", options: ["Tie Break", "Deuce", "Timeout", "Fulltime"], answer: 1 },
+            { q: "Selisih poin yang dibutuhkan saat terjadi Deuce adalah?", options: ["1 Poin", "2 Poin", "3 Poin", "5 Poin"], answer: 1 },
+            { q: "Berapa berat standar bola voli?", options: ["200-220 gram", "260-280 gram", "300-320 gram", "400 gram"], answer: 1 },
+            { q: "Service yang bolanya tidak berputar dan bergerak goyang disebut?", options: ["Power Serve", "Floating Serve", "Curve Serve", "Fast Serve"], answer: 1 },
+            { q: "Passing yang dilakukan dengan jari-jari tangan di atas kepala disebut?", options: ["Passing Bawah", "Passing Atas", "Dig", "Dive"], answer: 1 },
+            { q: "Passing yang dilakukan dengan lengan bawah disebut?", options: ["Passing Atas", "Passing Bawah", "Smash", "Block"], answer: 1 },
+            { q: "Lama waktu istirahat antar set adalah?", options: ["1 Menit", "2 Menit", "3 Menit", "5 Menit"], answer: 2 },
+            { q: "Jika terjadi set penentuan (set ke-5), poin kemenangan adalah?", options: ["11 Poin", "15 Poin", "21 Poin", "25 Poin"], answer: 1 },
+            { q: "Posisi pemain depan adalah posisi nomor?", options: ["1, 2, 3", "2, 3, 4", "4, 5, 6", "1, 6, 5"], answer: 1 },
+            { q: "Garis batas serang (Attack Line) berjarak berapa dari net?", options: ["2 Meter", "3 Meter", "4 Meter", "5 Meter"], answer: 1 },
+            { q: "Wasit utama dalam pertandingan bola voli disebut?", options: ["Umpire", "Referee", "Linesman", "Judge"], answer: 1 },
+            { q: "Berapa jumlah hakim garis (linesman) dalam pertandingan resmi?", options: ["1-2 Orang", "2-4 Orang", "6 Orang", "8 Orang"], answer: 1 },
+            { q: "Kartu kuning dalam bola voli berarti?", options: ["Peringatan", "Pengurangan Poin", "Diskualifikasi", "Ganti Pemain"], answer: 0 },
+            { q: "Kartu merah dalam bola voli diberikan sebagai?", options: ["Peringatan", "Hukuman (Lawan Poin)", "Keluar Set", "Diskualifikasi"], answer: 1 },
+            { q: "Bola dinyatakan masuk jika?", options: ["Menyentuh garis", "Di luar garis", "Mengenai wasit", "Mengenai tiang"], answer: 0 },
+            { q: "Antena (Rod) dipasang di ujung net setinggi?", options: ["60 cm", "80 cm", "100 cm", "120 cm"], answer: 1 },
+            { q: "Pelanggaran akibat menyentuh net disebut?", options: ["Holding", "Netting", "Lifting", "Double"], answer: 1 },
+            { q: "Pelanggaran bola mengenai tangan dua kali berturut-turut disebut?", options: ["Double Touch", "Lift Ball", "Carrying", "Over net"], answer: 0 },
+            { q: "Teknik bertahan dengan menjatuhkan diri ke lantai disebut?", options: ["Smash", "Dig/Dive", "Block", "Service"], answer: 1 },
+            { q: "Berapa keliling lingkaran bola voli standar?", options: ["60-62 cm", "65-67 cm", "70-72 cm", "75 cm"], answer: 1 },
+            { q: "Apa nama organisasi bola voli Amerika tempat Morgan bekerja?", options: ["YMCA", "NBA", "FIFA", "IOC"], answer: 0 },
+            { q: "Berapa lebar garis lapangan bola voli?", options: ["3 cm", "5 cm", "7 cm", "10 cm"], answer: 1 },
+            { q: "Tim yang menang adalah tim yang memenangkan berapa set?", options: ["2 Set", "3 Set", "4 Set", "5 Set"], answer: 1 },
+            { q: "Satu set berakhir jika salah satu tim mencapai angka 25, kecuali set?", options: ["Set 1", "Set 3", "Set 5", "Set 4"], answer: 2 },
+            { q: "Berapa jumlah maksimal pemain cadangan dalam satu tim?", options: ["4 Orang", "6 Orang", "8 Orang", "12 Orang"], answer: 1 },
+            { q: "Nama teknik memukul bola yang melambung jauh ke belakang?", options: ["Lob", "Spike", "Flick", "Chop"], answer: 0 },
+            { q: "Batas maksimal Time Out yang diminta pelatih per set?", options: ["1 Kali", "2 Kali", "3 Kali", "4 Kali"], answer: 1 },
+            { q: "Durasi satu kali Time Out adalah?", options: ["30 Detik", "60 Detik", "90 Detik", "120 Detik"], answer: 0 },
+            { q: "Warna pakaian Libero harus berbeda dengan?", options: ["Wasit", "Rekan Setim", "Lawan", "Penonton"], answer: 1 },
+            { q: "Tujuan utama teknik Blocking adalah?", options: ["Mencetak skor", "Menahan serangan", "Melakukan umpan", "Memulai game"], answer: 1 }
         ];
 
         let selectedRuleMode = 'score';
         let audioEnabled = false;
+        let gameActive = true;
+        let players = [];
+        const MAX_QUESTIONS = 10;
+
+        const AudioEngine = {
+            ctx: null,
+            init() { if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); },
+            playSFX(freq, type, duration) {
+                if (!audioEnabled || !this.ctx) return;
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+                gain.gain.setValueAtTime(0.05, this.ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + duration);
+                osc.connect(gain); gain.connect(this.ctx.destination);
+                osc.start(); osc.stop(this.ctx.currentTime + duration);
+            }
+        };
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+            else if (document.exitFullscreen) document.exitFullscreen();
+        }
 
         function setRules(mode) {
             selectedRuleMode = mode;
@@ -247,97 +269,210 @@
             document.getElementById('m-elim').classList.toggle('active', mode === 'elim');
         }
 
-        const SFX = {
-            ctx: null,
-            init() { if(!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); },
-            play(f, t, d) {
-                if(!audioEnabled || !this.ctx) return;
-                const o = this.ctx.createOscillator();
-                const g = this.ctx.createGain();
-                o.type = t; o.frequency.setValueAtTime(f, this.ctx.currentTime);
-                g.gain.setValueAtTime(0.1, this.ctx.currentTime);
-                g.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + d);
-                o.connect(g); g.connect(this.ctx.destination);
-                o.start(); o.stop(this.ctx.currentTime + d);
-            }
-        };
-
         document.getElementById('audio-toggle').onclick = (e) => {
             audioEnabled = !audioEnabled;
-            e.target.textContent = audioEnabled ? '🔊' : '🔈';
-            SFX.init();
+            e.currentTarget.textContent = audioEnabled ? '🔊' : '🔈';
+            AudioEngine.init();
         };
 
         class Player {
             constructor(id, container) {
                 this.id = id;
                 this.score = 0;
+                this.lives = 3;
+                this.questionsCount = 0;
+                this.isDone = false;
+                this.isEliminated = false;
                 this.timer = null;
+                this.questionQueue = []; 
+                this.refreshQueue();
+
                 this.el = document.createElement('div');
                 this.el.className = 'player-area';
-                this.el.innerHTML = `
-                    <div class="hud"><span>P${id}</span> <span class="score-val">0</span></div>
-                    <div class="timer-track"><div class="timer-fill"></div></div>
-                    <div class="game-content">
-                        <div class="playground"><div class="ball">⚽</div></div>
-                        <div class="question-card">
-                            <div class="q-text">...</div>
-                            <div class="options-grid">
-                                ${[0,1,2,3].map(i => `<button class="option-btn" data-idx="${i}"></button>`).join('')}
-                            </div>
-                        </div>
-                    </div>
-                `;
+                this.updateUI();
                 container.appendChild(this.el);
-                this.btns = this.el.querySelectorAll('.option-btn');
-                this.btns.forEach(b => b.onclick = () => this.checkAnswer(b));
                 this.nextQuestion();
             }
 
-            nextQuestion() {
-                const q = questionBank[Math.floor(Math.random()*questionBank.length)];
-                this.currentQ = q;
-                this.el.querySelector('.q-text').textContent = q.q;
-                this.el.querySelector('.ball').textContent = q.theme;
-                this.btns.forEach((b, i) => {
-                    b.textContent = q.options[i];
-                    b.style.background = 'rgba(255,255,255,0.05)';
-                });
-                this.resetTimer();
+            refreshQueue() {
+                let indices = Array.from({length: questionBank.length}, (_, i) => i);
+                indices.sort(() => Math.random() - 0.5);
+                this.questionQueue = indices;
             }
 
-            resetTimer() {
-                clearInterval(this.timer);
+            updateUI() {
+                const stats = selectedRuleMode === 'score' ? 
+                    `SOAL: ${this.questionsCount}/${MAX_QUESTIONS}` : 
+                    `NYAWA: ${'❤️'.repeat(this.lives)}`;
+
+                this.el.innerHTML = `
+                    <div class="hud" style="border-bottom: 3px solid var(--p${this.id})">
+                        <span>P${this.id}</span>
+                        <div class="stats-area">${stats}</div>
+                    </div>
+                    <div class="timer-track"><div class="timer-fill"></div></div>
+                    <div class="game-content">
+                        <div class="playground"><div class="ball floating">🏐</div></div>
+                        <div class="question-card">
+                            <div class="q-text">Siap?</div>
+                            <div class="options-grid">
+                                ${[0,1,2,3].map(i => `<button class="option-btn" onclick="players[${this.id-1}].checkAnswer(${i})"></button>`).join('')}
+                            </div>
+                        </div>
+                        <div style="text-align:center; font-weight:900; color:var(--p${this.id}); padding: 5px;">SKOR: ${this.score}</div>
+                    </div>
+                `;
+            }
+
+            nextQuestion() {
+                if (!gameActive || this.isDone || this.isEliminated) return;
+                
+                if (selectedRuleMode === 'score' && this.questionsCount >= MAX_QUESTIONS) {
+                    this.finish();
+                    return;
+                }
+
+                if (this.questionQueue.length === 0) this.refreshQueue();
+                this.currentIdx = this.questionQueue.pop();
+                
+                const q = questionBank[this.currentIdx];
+                this.el.querySelector('.q-text').textContent = q.q;
+                
+                const btns = this.el.querySelectorAll('.option-btn');
+                btns.forEach((b, i) => {
+                    b.textContent = q.options[i];
+                    b.style.background = 'rgba(255,255,255,0.05)';
+                    b.disabled = false;
+                });
+
+                this.startTimer();
+            }
+
+            startTimer() {
+                if (this.timer) clearInterval(this.timer);
                 let timeLeft = 10;
+                const fill = this.el.querySelector('.timer-fill');
                 this.timer = setInterval(() => {
+                    if (!gameActive) { clearInterval(this.timer); return; }
                     timeLeft -= 0.1;
-                    this.el.querySelector('.timer-fill').style.width = (timeLeft * 10) + '%';
-                    if(timeLeft <= 0) this.nextQuestion();
+                    fill.style.width = (timeLeft * 10) + '%';
+                    if (timeLeft <= 0) {
+                        clearInterval(this.timer);
+                        this.handleResult(false);
+                    }
                 }, 100);
             }
 
-            checkAnswer(btn) {
-                const isCorrect = parseInt(btn.dataset.idx) === this.currentQ.answer;
-                if(isCorrect) {
-                    SFX.play(600, 'sine', 0.2);
+            checkAnswer(idx) {
+                if (!gameActive || this.isDone || this.isEliminated) return;
+                clearInterval(this.timer);
+                const isCorrect = idx === questionBank[this.currentIdx].answer;
+                this.handleResult(isCorrect, idx);
+            }
+
+            handleResult(isCorrect, btnIdx = null) {
+                const btns = this.el.querySelectorAll('.option-btn');
+                const ball = this.el.querySelector('.ball');
+                btns.forEach(b => b.disabled = true);
+                
+                if (isCorrect) {
+                    AudioEngine.playSFX(600, 'sine', 0.1);
+                    if (btnIdx !== null) btns[btnIdx].style.background = 'var(--primary)';
                     this.score += 100;
-                    this.el.querySelector('.score-val').textContent = this.score;
-                    btn.style.background = 'var(--primary)';
+                    ball.style.transform = "scale(1.5) rotate(360deg)";
+                    setTimeout(() => ball.style.transform = "", 500);
                 } else {
-                    SFX.play(150, 'square', 0.3);
-                    btn.style.background = 'var(--danger)';
+                    AudioEngine.playSFX(150, 'square', 0.3);
+                    this.el.querySelector('.question-card').classList.add('shake');
+                    if (btnIdx !== null) btns[btnIdx].style.background = 'var(--danger)';
+                    if (selectedRuleMode === 'elim') {
+                        this.lives--;
+                    }
                 }
-                setTimeout(() => this.nextQuestion(), 400);
+
+                this.questionsCount++;
+
+                setTimeout(() => {
+                    this.el.querySelector('.question-card').classList.remove('shake');
+                    if (selectedRuleMode === 'elim' && this.lives <= 0) {
+                        this.isEliminated = true;
+                        this.el.classList.add('eliminated');
+                    }
+                    this.refreshHUD();
+                    this.nextQuestion();
+                    checkGlobalEnd();
+                }, 600);
+            }
+
+            refreshHUD() {
+                const statsArea = this.el.querySelector('.stats-area');
+                if (selectedRuleMode === 'score') {
+                    statsArea.textContent = `SOAL: ${Math.min(this.questionsCount, MAX_QUESTIONS)}/${MAX_QUESTIONS}`;
+                } else {
+                    statsArea.textContent = `NYAWA: ${'❤️'.repeat(Math.max(0, this.lives))}`;
+                }
+                this.el.querySelector('.game-content > div:last-child').textContent = `SKOR: ${this.score}`;
+            }
+
+            finish() {
+                this.isDone = true;
+                this.el.classList.add('eliminated');
+                this.el.querySelector('.q-text').textContent = "SELESAI!";
+                this.el.querySelector('.timer-fill').style.width = '0%';
             }
         }
 
         function initGame(num) {
-            SFX.init();
+            AudioEngine.init();
+            gameActive = true;
             document.getElementById('main-menu').style.display = 'none';
             const gc = document.getElementById('game-container');
             gc.style.display = 'grid';
+            gc.innerHTML = '';
             gc.className = num === 1 ? 'mode-solo' : num === 2 ? 'mode-duel' : 'mode-squad';
-            for(let i=1; i<=num; i++) new Player(i, gc);
+            players = [];
+            for(let i=1; i<=num; i++) players.push(new Player(i, gc));
+        }
+
+        function checkGlobalEnd() {
+            if (selectedRuleMode === 'score') {
+                if (players.every(p => p.isDone)) endGame();
+            } else {
+                const active = players.filter(p => !p.isEliminated);
+                if (players.length > 1 && active.length <= 1) endGame();
+                else if (players.length === 1 && active.length === 0) endGame();
+            }
+        }
+
+        function endGame() {
+            gameActive = false;
+            const screen = document.getElementById('victory-screen');
+            const board = document.getElementById('scoreboard-results');
+            screen.style.display = 'flex';
+            board.innerHTML = '';
+
+            const sorted = [...players].sort((a, b) => b.score - a.score);
+            sorted.forEach((p, i) => {
+                const row = document.createElement('div');
+                row.style.display = 'flex';
+                row.style.justifyContent = 'space-between';
+                row.style.alignItems = 'center';
+                row.style.padding = '15px';
+                row.style.marginBottom = '8px';
+                row.style.background = 'rgba(255,255,255,0.05)';
+                row.style.borderRadius = '15px';
+                row.style.borderLeft = `6px solid var(--p${p.id})`;
+                row.innerHTML = `
+                    <div style="display:flex; align-items:center; gap:10px">
+                        <span style="font-weight:900; font-size:1.2rem; color:var(--accent)">#${i+1}</span>
+                        <span style="font-weight:700">Pemain ${p.id}</span>
+                    </div>
+                    <strong style="font-size:1.2rem">${p.score} PT</strong>
+                `;
+                board.appendChild(row);
+            });
+
+            AudioEngine.playSFX(500, 'sine', 0.5);
         }
     </script>
 </body>
